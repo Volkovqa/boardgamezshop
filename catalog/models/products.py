@@ -1,5 +1,4 @@
 from django.db import models
-from catalog.models import Category
 
 NULLABLE = {
     'blank': True,
@@ -16,7 +15,7 @@ class Product(models.Model):
     name = models.CharField(max_length=50, verbose_name='Наименование', **NOT_NULLABLE)
     description = models.TextField(verbose_name='Описание', **NULLABLE)
     image = models.ImageField(upload_to='products/', **NULLABLE)
-    category_id = models.ForeignKey('Category', on_delete=models.CASCADE, verbose_name='Категория')
+    category = models.ForeignKey('Category', on_delete=models.CASCADE, verbose_name='Категория')
     price = models.PositiveIntegerField(default=0, verbose_name='Цена', **NOT_NULLABLE)
     created_at = models.DateTimeField(auto_now_add=True, **NOT_NULLABLE)
     updated_at = models.DateTimeField(auto_now=True, **NOT_NULLABLE)
