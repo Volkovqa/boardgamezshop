@@ -1,3 +1,4 @@
+{% load tags_lib %}
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head>
@@ -272,9 +273,11 @@
                         <h4 class="my-0 fw-normal">{{ object.name|title }}</h4>
                     </div>
                     <div class="card-body">
+                        <img src="{{ object.image|mediapath }}"
+                             class="card-img-top">
                         <h1 class="card-title pricing-card-title">{{ object.price }}</h1>
                         <ul class="list-unstyled mt-3 mb-4">
-                            <li>{{ object.description }}</li>
+                            <li>{{ object.description|slice:100 }}</li>
                         </ul>
                         <button type="button" class="w-100 btn btn-lg btn-outline-primary">Карточка</button>
                     </div>
