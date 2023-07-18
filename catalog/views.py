@@ -5,6 +5,10 @@ def load_home(request):
     return render(request, 'catalog/home.html')
 
 
+def load_prod_card(request):
+    return render(request, 'catalog/prod_card.html')
+
+
 def load_contacts(request):
     if request.method == "POST":
         name = request.POST.get("name")
