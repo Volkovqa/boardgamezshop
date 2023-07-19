@@ -5,10 +5,13 @@ register = template.Library()
 
 @register.simple_tag
 def mediapath(path):
-    return '/media/' + str(path)
+    if path:
+        return '/media/' + str(path)
+    return '/media/products/no_image.jpg'
 
 
-@register.filter
+@register.filter(name='mediapath')
 def mediapath(path):
-    return '/media/' + str(path)
-
+    if path:
+        return '/media/' + str(path)
+    return '/media/products/no_image.jpg'
