@@ -17,10 +17,6 @@ def prod_card(request, pk):
     return render(request, 'catalog/prod_card.html', context)
 
 
-def sidebar(request):
-    return render(request, 'catalog/sidebar.html')
-
-
 def base(request):
     return render(request, 'catalog/base.html')
 

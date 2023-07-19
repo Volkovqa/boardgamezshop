@@ -1,6 +1,12 @@
 {% extends 'catalog/base.html' %}
 {% load tags_lib %}
 {% block content %}
+<header>
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-3 fw-normal text-body-emphasis">Главная</h1>
+        <p class="fs-5 text-body-secondary">Вы находитесь на сайте для продажи товаров</p>
+    </div>
+</header>
 <div class="row row-cols-1 row-cols-md-3 text-center">
     {% for object in object_list %}
     <div class="col">
