@@ -1,6 +1,9 @@
 {% extends 'catalog/base.html' %}
 {% block content %}
 {% load tags_lib %}
+{% for object in object_list %}
+<title>{{ object.name|title }} - карточка товара</title>
+{% endfor %}
 <div class="container py-3">
     <header>
         <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
