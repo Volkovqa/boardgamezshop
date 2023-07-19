@@ -267,14 +267,13 @@
     <main>
         <div class="card" style="width: 45rem;">
             {% for object in object_list %}
-            {% if object.name == "Radlands" %}
             <img src="{{ object.image|mediapath }}" class="card-img-top">
             <div class="card-body">
-                <h4 class="card-title">{{ object.name|title }}</h4>
+                <h2 class="card-title">{{ object.name|title }}</h2>
+                <h3 class="card-title">{{ object.price }}</h3>
                 <p class="card-text">{{ object.description }}</p>
                 <a href="#" class="btn btn-primary">Купить</a>
             </div>
-            {% endif %}
             {% endfor %}
         </div>
     </main>

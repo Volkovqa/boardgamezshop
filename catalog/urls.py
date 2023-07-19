@@ -4,7 +4,7 @@ from catalog.views import *
 urlpatterns = [
     path('', load_home),
     path('contacts/', load_contacts),
-    path('prod_card/', load_prod_card),
+    path('<int:pk>/prod_card/', prod_card, name='prod_card'),
     path('sidebar/', sidebar),
     path('base/', base)
 ]

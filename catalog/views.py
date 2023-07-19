@@ -10,10 +10,9 @@ def load_home(request):
     return render(request, 'catalog/home.html', context)
 
 
-def load_prod_card(request):  # в карточке товара зашит определенный продукт. я пока не знаю, как туда передавать данные
-    items_list = Product.objects.all()
+def prod_card(request, pk):
     context = {
-        'object_list': items_list
+        'object_list': Product.objects.filter(pk=pk)
     }
     return render(request, 'catalog/prod_card.html', context)
 
