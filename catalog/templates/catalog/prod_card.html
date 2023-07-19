@@ -1,3 +1,4 @@
+{% load tags_lib %}
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head>
@@ -148,7 +149,7 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="/" class="nav-link active" aria-current="page">
+        <a href="/" class="nav-link text-white">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           Главная
         </a>
@@ -264,7 +265,18 @@
     </header>
 
     <main>
-
+        <div class="card" style="width: 45rem;">
+            {% for object in object_list %}
+            {% if object.name == "Radlands" %}
+            <img src="{{ object.image|mediapath }}" class="card-img-top">
+            <div class="card-body">
+                <h4 class="card-title">{{ object.name|title }}</h4>
+                <p class="card-text">{{ object.description }}</p>
+                <a href="#" class="btn btn-primary">Купить</a>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
     </main>
 </div>
 </div>
