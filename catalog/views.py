@@ -1,30 +1,32 @@
 from django.shortcuts import render
+from django.views.generic import ListView, DetailView, TemplateView
+
 from catalog.models import Product
 
 
-def load_home(request):
-    products_list = Product.objects.all()
-    context = {
-        'object_list': products_list
-    }
-    return render(request, 'catalog/home.html', context)
+class ProductListView(ListView):
+    model = Product
 
 
-def prod_card(request, pk):
-    context = {
-        'object_list': Product.objects.filter(pk=pk)
-    }
-    return render(request, 'catalog/prod_card.html', context)
+class ProductDetailView(DetailView):
+    model = Product
 
 
 def base(request):
     return render(request, 'catalog/base.html')
 
 
-def load_contacts(request):
-    if request.method == "POST":
-        name = request.POST.get("name")
-        email = request.POST.get("email")
-        message = request.POST.get("message")
-        print(f"New message!\nAuthor's name: {name}\nemail: {email}\nMessage: {message}")
-    return render(request, 'catalog/contacts.html')
+class ContactView(TemplateView):
+    template_name = 'catalog/contacts.html'
+
+    def post(self, request, **kwargs):
+        context = self.get_context_data(**kwargs)
+        return self.render_to_response(context)
+
+    def get_context_data(self, **kwargs):
+        if self.request.method == 'POST':
+            name = self.request.POST.get('name')
+            email = self.request.POST.get('email')
+            message = self.request.POST.get('message')
+            print(f"New message!\nAuthor's name: {name}\nemail: {email}\nMessage: {message}")
+        return super().get_context_data(**kwargs)

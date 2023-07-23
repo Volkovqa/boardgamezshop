@@ -1,9 +1,7 @@
 {% extends 'catalog/base.html' %}
 {% block content %}
 {% load tags_lib %}
-{% for object in object_list %}
 <title>{{ object.name|title }} - карточка товара</title>
-{% endfor %}
 <div class="container py-3">
     <header>
         <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
@@ -14,7 +12,6 @@
 
 
     <div class="card" style="width: 45rem;">
-        {% for object in object_list %}
         <img src="{{ object.image|mediapath }}" class="card-img-top">
         <div class="card-body">
             <h2 class="card-title">{{ object.name|title }}</h2>
@@ -22,7 +19,6 @@
             <p class="card-text">{{ object.description }}</p>
             <a href="#" class="btn btn-primary">Купить</a>
         </div>
-        {% endfor %}
     </div>
 </div>
 
