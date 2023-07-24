@@ -5,7 +5,7 @@
 <div class="container py-3">
     <header>
         <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-            <h1 class="display-3 fw-normal text-body-emphasis">{{ object.title|title }}</h1>
+            <h1 class="display-3 fw-normal text-body-emphasis">{{ object.title|title }} ({{ object.slug }})</h1>
         </div>
     </header>
 
@@ -14,6 +14,9 @@
         <img src="{{ object.image|mediapath }}" class="card-img-top">
         <div class="card-body">
             <p class="card-text">{{ object.content }}</p>
+        </div>
+        <div class="card-footer">
+            Просмотры: {{ object.views_count }}
         </div>
     </div>
 </div>
