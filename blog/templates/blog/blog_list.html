@@ -1,0 +1,34 @@
+{% extends 'catalog/base.html' %}
+{% load tags_lib %}
+{% block content %}
+<title>Boardgamezshop - Блог</title>
+<header>
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-3 fw-normal text-body-emphasis">Текстовые материалы</h1>
+        <p class="fs-5 text-body-secondary">Вы находитесь на станице с материалами</p>
+    </div>
+</header>
+<div class="col-12 mb-5">
+    <a href="{% url 'blog:create' %}" type="button" class="w-100 btn btn-lg btn-outline-primary">Создать материал</a>
+</div>
+<div class="row row-cols-9 row-cols-md-3 text-center">
+    {% for object in object_list %}
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm" style="width: 20rem; height: 30rem">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">{{ object.title|title }}</h4>
+            </div>
+            <div class="card-body">
+                <img src="{{ object.image|mediapath }}"
+                     class="card-img-top" style="width: 10rem; height: 10rem">
+                <a href="{% url 'blog:view' object.pk%}" type="button" class="w-100 btn btn-lg btn-outline-primary">Просмотреть</a>
+                <div class="space" style="height: 2rem"></div>
+                <a href="{% url 'blog:edit' object.pk%}" type="button" class="w-100 btn btn-lg btn-outline-warning">Изменить</a>
+                <div class="space" style="height: 2rem"></div>
+                <a href="{% url 'blog:delete' object.pk%}" type="button" class="w-100 btn btn-lg btn-outline-danger">Удалить</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+{% load tags_lib %}
+<title>{{ object.title|title }} - полный материал</title>
+<div class="container py-3">
+    <header>
+        <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+            <h1 class="display-3 fw-normal text-body-emphasis">{{ object.title|title }}</h1>
+        </div>
+    </header>
+
+
+    <div class="card" style="width: 45rem;">
+        <img src="{{ object.image|mediapath }}" class="card-img-top">
+        <div class="card-body">
+            <p class="card-text">{{ object.content }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
