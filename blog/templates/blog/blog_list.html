@@ -19,8 +19,8 @@
                 <h4 class="my-0 fw-normal">{{ object.title|title }}</h4>
             </div>
             <div class="card-body">
-                <img src="{{ object.image|mediapath }}"
-                     class="card-img-top" style="width: 10rem; height: 10rem">
+<!--                <img src="{{ object.image|mediapath }}"-->
+<!--                     class="card-img-top" style="width: 10rem; height: 10rem">-->
                 <a href="{% url 'blog:view' object.pk%}" type="button" class="w-100 btn btn-lg btn-outline-primary">Просмотреть</a>
                 <div class="space" style="height: 2rem"></div>
                 <a href="{% url 'blog:edit' object.pk%}" type="button" class="w-100 btn btn-lg btn-outline-warning">Изменить</a>
