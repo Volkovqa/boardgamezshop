@@ -8,6 +8,10 @@
         <p class="fs-5 text-body-secondary">Вы находитесь на сайте для продажи товаров</p>
     </div>
 </header>
+<div class="col-12 mb-5">
+    <a href="{% url 'catalog:product_create' %}" type="button" class="w-100 btn btn-lg btn-outline-primary">Добавить
+        товар</a>
+</div>
 <div class="row row-cols-9 row-cols-md-3 text-center">
     {% for object in object_list %}
     <div class="col">
@@ -25,6 +29,13 @@
                 <a href="{% url 'catalog:product_detail' object.pk%}" type="button"
                    class="w-100 btn btn-lg btn-outline-primary">Карточка</a>
             </div>
+            {% for version_item in object.version_set.all %}
+            {% if version_item.is_actual %}
+            <div class="card-footer">
+                <p>Актуальная версия: {{ version_item.name }} - номер {{ version_item.version_number }} </p>
+            </div>
+            {% endif %}
+            {% endfor %}
         </div>
     </div>
     {% endfor %}
