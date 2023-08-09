@@ -8,10 +8,12 @@
         <p class="fs-5 text-body-secondary">Вы находитесь на сайте для продажи товаров</p>
     </div>
 </header>
+{% if user.is_authenticated %}
 <div class="col-12 mb-5">
     <a href="{% url 'catalog:product_create' %}" type="button" class="w-100 btn btn-lg btn-outline-primary">Добавить
         товар</a>
 </div>
+{% endif %}
 <div class="row row-cols-9 row-cols-md-3 text-center">
     {% for object in object_list %}
     <div class="col">

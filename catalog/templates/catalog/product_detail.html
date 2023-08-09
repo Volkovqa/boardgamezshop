@@ -17,8 +17,10 @@
             <h2 class="card-title">{{ object.name|title }}</h2>
             <h3 class="card-title">{{ object.price }}</h3>
             <p class="card-text">{{ object.description }}</p>
+            {% if user.is_authenticated %}
             <a href="{% url 'catalog:product_edit' object.pk %}" class="btn btn-warning">Edit</a>
             <a href="{% url 'catalog:product_delete' object.pk %}" class="btn btn-danger">Delete</a>
+            {% endif %}
         </div>
     </div>
 </div>
