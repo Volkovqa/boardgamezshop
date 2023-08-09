@@ -1,0 +1,41 @@
+[
+  {
+    "model": "blog.blog",
+    "pk": 17,
+    "fields": {
+      "title": "Отзыв на Мезень",
+      "slug": "otzyiv-na-mezen",
+      "content": "Текст отзыва",
+      "image": "blog_preview/mezen.jpeg",
+      "created_date": "2023-07-24",
+      "is_published": true,
+      "views_count": 1
+    }
+  },
+  {
+    "model": "blog.blog",
+    "pk": 18,
+    "fields": {
+      "title": "Отзыв на Pandemic",
+      "slug": "otzyiv-na-pandemic",
+      "content": "Everdell",
+      "image": "blog_preview/pendemic.jpg",
+      "created_date": "2023-07-24",
+      "is_published": true,
+      "views_count": 2
+    }
+  },
+  {
+    "model": "blog.blog",
+    "pk": 19,
+    "fields": {
+      "title": "Отзыв на Каркассон",
+      "slug": "otzyiv-na-karkasson",
+      "content": "Наша любимая семейка",
+      "image": "blog_preview/carcassone.jpg",
+      "created_date": "2023-07-24",
+      "is_published": true,
+      "views_count": 0
+    }
+  }
+]

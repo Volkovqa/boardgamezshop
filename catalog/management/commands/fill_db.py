@@ -9,5 +9,6 @@ class Command(BaseCommand):
         Category.objects.all().delete()
         Product.objects.all().delete()
 
-        call_command('loaddata', 'load.json')
+        call_command('loaddata', 'fix_data/catalog_data.json')
+        call_command('loaddata', 'fix_data/blog_data.json')
 
