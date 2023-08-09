@@ -9,37 +9,41 @@
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
             <a href="/" class="nav-link text-white">
-                <svg class="bi pe-none me-2" width="16" height="16">
-                    <use xlink:href="#home"/>
-                </svg>
                 Главная
             </a>
         </li>
-        <li>
+        <li class="nav-item">
             <a href="/contacts" class="nav-link text-white">
-                <svg class="bi pe-none me-2" width="16" height="16">
-                    <use xlink:href="#people-circle"/>
-                </svg>
                 Контакты
             </a>
+        </li>
+        <li class="nav-item">
             <a href="{% url 'blog:list' %}" class="nav-link text-white">
-                <svg class="bi pe-none me-2" width="16" height="16">
-                    <use xlink:href="#people-circle"/>
-                </svg>
                 Блог
             </a>
         </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a href="{% url 'users:profile' %}" class="nav-link text-white">
+                Профиль
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'users:logout' %}" class="nav-link text-white">
+                Выход
+            </a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+            <a href="{% url 'users:login' %}" class="nav-link text-white">
+                Вход
+            </a>
+        <li class="nav-item">
+            <a href="{% url 'users:register' %}" class="nav-link text-white">
+                Регистрация
+            </a>
+        </li>
+        {% endif %}
     </ul>
     <hr>
-    <div class="dropdown">
-        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-           data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-            <strong>Пользователь</strong>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-            <li><a class="dropdown-item" href="#">Профиль</a></li>
-            <li><a class="dropdown-item" href="#">Выход</a></li>
-        </ul>
-    </div>
 </div>
