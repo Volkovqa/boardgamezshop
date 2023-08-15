@@ -1,0 +1,28 @@
+{% extends 'catalog/base.html' %}
+{% load tags_lib %}
+{% block content %}
+<title>Категории</title>
+<header>
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-3 fw-normal text-body-emphasis">Категории настольных игр</h1>
+    </div>
+</header>
+<div class="row row-cols-9 row-cols-md-3 text-center">
+    {% for object in object_list %}
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm" style="width: 20rem; height: 30rem">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">{{ object.name|title }}</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>{{ object.description|slice:100 }}</li>
+                </ul>
+                <a href="{% url 'catalog:category_products' object.pk%}" type="button"
+                   class="w-100 btn btn-lg btn-outline-primary">Игры категории</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
