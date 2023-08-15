@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.cache import cache
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
@@ -6,6 +7,7 @@ from django.views.generic import ListView, DetailView, TemplateView, CreateView,
 
 from catalog.forms import ProductForm, VersionForm
 from catalog.models import Product, Version
+from config import settings
 
 
 class ProductListView(ListView):
@@ -14,6 +16,21 @@ class ProductListView(ListView):
 
 class ProductDetailView(DetailView):
     model = Product
+
+    # это для эксперимента учебной части
+    # def get_context_data(self, **kwargs):
+    #     context_data = super().get_context_data(**kwargs)
+    #     if settings.CACHE_ENABLED:
+    #         key = f'subject_{self.object.pk}'
+    #         subject_cache = cache.get(key)
+    #         if subject_cache is None:
+    #             subject_cache = self.object
+    #             cache.set(key, subject_cache)
+    #     else:
+    #         subject_cache = self.object
+    #
+    #     context_data['subjects'] = subject_cache
+    #     return context_data
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
