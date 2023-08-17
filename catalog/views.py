@@ -5,7 +5,11 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 
 from catalog.forms import ProductForm, VersionForm
-from catalog.models import Product, Version
+from catalog.models import Product, Version, Category
+from catalog.services import get_category_cache
+
+# from config import settings
+# from django.core.cache import cache
 
 
 class ProductListView(ListView):
@@ -14,6 +18,21 @@ class ProductListView(ListView):
 
 class ProductDetailView(DetailView):
     model = Product
+
+    # это для эксперимента учебной части
+    # def get_context_data(self, **kwargs):
+    #     context_data = super().get_context_data(**kwargs)
+    #     if settings.CACHE_ENABLED:
+    #         key = f'subject_{self.object.pk}'
+    #         subject_cache = cache.get(key)
+    #         if subject_cache is None:
+    #             subject_cache = self.object
+    #             cache.set(key, subject_cache)
+    #     else:
+    #         subject_cache = self.object
+    #
+    #     context_data['subjects'] = subject_cache
+    #     return context_data
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
@@ -79,3 +98,26 @@ class ContactView(TemplateView):
             message = self.request.POST.get('message')
             print(f"New message!\nAuthor's name: {name}\nemail: {email}\nMessage: {message}")
         return super().get_context_data(**kwargs)
+
+
+class CategoryListView(ListView):
+    model = Category
+    queryset = get_category_cache()
+
+
+class CategoryProductListView(ListView):
+    model = Product
+    template_name = 'catalog/category_product_list.html'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(category_id=self.kwargs.get('pk'))
+        return queryset
+
+    def get_context_data(self, *args, **kwargs):
+        context_data = super().get_context_data(*args, **kwargs)
+
+        category_item = Category.objects.get(pk=self.kwargs.get('pk'))
+        context_data['category_pk'] = category_item.pk
+        context_data['title'] = f'{category_item.name}'
+        return context_data

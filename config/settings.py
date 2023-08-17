@@ -159,3 +159,13 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = 'volkovqa@yandex.ru'
 EMAIL_HOST_PASSWORD = get_env_value('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL = True
+
+CACHE_ENABLED = get_env_value('CACHE_ENABLED') == 'True'
+
+if CACHE_ENABLED:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": get_env_value('CACHE_LOCATION'),
+        }
+    }
