@@ -1,7 +1,15 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.forms import inlineformset_factory
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, TemplateView
+from django.urls import reverse_lazy, reverse
+from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 
-from catalog.models import Product
+from catalog.forms import ProductForm, VersionForm
+from catalog.models import Product, Version, Category
+from catalog.services import get_category_cache
+
+# from config import settings
+# from django.core.cache import cache
 
 
 class ProductListView(ListView):
@@ -10,6 +18,66 @@ class ProductListView(ListView):
 
 class ProductDetailView(DetailView):
     model = Product
+
+    # это для эксперимента учебной части
+    # def get_context_data(self, **kwargs):
+    #     context_data = super().get_context_data(**kwargs)
+    #     if settings.CACHE_ENABLED:
+    #         key = f'subject_{self.object.pk}'
+    #         subject_cache = cache.get(key)
+    #         if subject_cache is None:
+    #             subject_cache = self.object
+    #             cache.set(key, subject_cache)
+    #     else:
+    #         subject_cache = self.object
+    #
+    #     context_data['subjects'] = subject_cache
+    #     return context_data
+
+
+class ProductCreateView(LoginRequiredMixin, CreateView):
+    model = Product
+    form_class = ProductForm
+    success_url = reverse_lazy('catalog:product_list')
+    login_url = 'users:login'
+
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.vendor = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+
+
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
+    model = Product
+    form_class = ProductForm
+    login_url = 'users:login'
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        VersionFormset = inlineformset_factory(self.model, Version, form=VersionForm, extra=1)
+        if self.request.method == 'POST':
+            context_data['formset'] = VersionFormset(self.request.POST, instance=self.object)
+        else:
+            context_data['formset'] = VersionFormset(instance=self.object)
+        return context_data
+
+    def form_valid(self, form):
+        formset = self.get_context_data()['formset']
+        self.object = form.save()
+        if formset.is_valid():
+            formset.instance = self.object
+            formset.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('catalog:product_detail', args=[self.kwargs.get('pk')])
+
+
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
+    model = Product
+    success_url = reverse_lazy('catalog:product_list')
+    login_url = 'users:login'
 
 
 def base(request):
@@ -30,3 +98,26 @@ class ContactView(TemplateView):
             message = self.request.POST.get('message')
             print(f"New message!\nAuthor's name: {name}\nemail: {email}\nMessage: {message}")
         return super().get_context_data(**kwargs)
+
+
+class CategoryListView(ListView):
+    model = Category
+    queryset = get_category_cache()
+
+
+class CategoryProductListView(ListView):
+    model = Product
+    template_name = 'catalog/category_product_list.html'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(category_id=self.kwargs.get('pk'))
+        return queryset
+
+    def get_context_data(self, *args, **kwargs):
+        context_data = super().get_context_data(*args, **kwargs)
+
+        category_item = Category.objects.get(pk=self.kwargs.get('pk'))
+        context_data['category_pk'] = category_item.pk
+        context_data['title'] = f'{category_item.name}'
+        return context_data

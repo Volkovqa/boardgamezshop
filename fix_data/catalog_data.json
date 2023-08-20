@@ -1,0 +1,215 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Семейные игры",
+      "description": "Несложные игры для всей семьи"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Мидкор",
+      "description": "Игры средней сложности для опытных игроков"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "name": "Хардкор",
+      "description": "Сложные игры, комплексные правила, долгое время партии."
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+      "name": "Warhammer 40000",
+      "description": "Игры по вселенной темного будущего"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+      "name": "Кооперативные",
+      "description": "Проигрывать всей компанией!"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 6,
+    "fields": {
+      "name": "Патигеймы",
+      "description": "Под пиво"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 7,
+    "fields": {
+      "name": "Дуэльные",
+      "description": "Мы с девушкой часто рубимся 1 на 1"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 11,
+    "fields": {
+      "name": "Radlands",
+      "description": "Киберпанк, постапок",
+      "image": "products/radlands.webp",
+      "category": 7,
+      "price": 2900,
+      "created_at": "2023-07-18T17:21:59.088Z",
+      "updated_at": "2023-08-05T08:14:02.254Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 12,
+    "fields": {
+      "name": "Каркассон",
+      "description": "Постройте свою лучшую крепость",
+      "image": "products/carcassone.jpg",
+      "category": 1,
+      "price": 1900,
+      "created_at": "2023-07-18T17:22:45.436Z",
+      "updated_at": "2023-08-05T08:14:11.452Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 13,
+    "fields": {
+      "name": "Мезень",
+      "description": "Игра с красивым оформлением и тематикой из Мезенского региона России",
+      "image": "products/mezen.jpeg",
+      "category": 2,
+      "price": 2900,
+      "created_at": "2023-07-18T17:23:28.007Z",
+      "updated_at": "2023-07-18T17:23:28.008Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 14,
+    "fields": {
+      "name": "Пандемия",
+      "description": "Игра про 2020",
+      "image": "products/pendemic.jpg",
+      "category": 5,
+      "price": 1900,
+      "created_at": "2023-07-18T17:23:56.656Z",
+      "updated_at": "2023-07-18T17:23:56.656Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 15,
+    "fields": {
+      "name": "Эверделл",
+      "description": "Семейная игра про город животных",
+      "image": "products/everdell.jpg",
+      "category": 1,
+      "price": 3900,
+      "created_at": "2023-07-18T17:24:52.324Z",
+      "updated_at": "2023-07-18T17:24:52.324Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 16,
+    "fields": {
+      "name": "Покорение Марса",
+      "description": "Постройте свою колонию на Марсе",
+      "image": "products/terrraforming_mars_2XQyjlQ.jpg",
+      "category": 2,
+      "price": 4900,
+      "created_at": "2023-07-18T17:25:26.580Z",
+      "updated_at": "2023-07-18T17:25:26.580Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 18,
+    "fields": {
+      "name": "Энергосеть",
+      "description": "Топовая евро про строительство энергостанций и проведение сетей.",
+      "image": "products/Energoset_00.jpg",
+      "category": 2,
+      "price": 4990,
+      "created_at": "2023-07-24T17:50:07.606Z",
+      "updated_at": "2023-07-24T17:50:07.606Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 25,
+    "fields": {
+      "name": "Test111111",
+      "description": "1234567890",
+      "image": "",
+      "category": 7,
+      "price": 4500,
+      "created_at": "2023-08-08T18:07:06.370Z",
+      "updated_at": "2023-08-08T18:07:06.370Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 26,
+    "fields": {
+      "name": "eawzgrxhtcyj",
+      "description": "ezgdrfxhcjvkbl",
+      "image": "",
+      "category": 2,
+      "price": 0,
+      "created_at": "2023-08-08T18:07:43.376Z",
+      "updated_at": "2023-08-08T18:07:43.376Z"
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 3,
+    "fields": {
+      "product": 12,
+      "version_number": 2,
+      "name": "Develop",
+      "is_actual": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 4,
+    "fields": {
+      "product": 13,
+      "version_number": 3,
+      "name": "Post_production",
+      "is_actual": false
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 5,
+    "fields": {
+      "product": 14,
+      "version_number": 4,
+      "name": "Release",
+      "is_actual": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 8,
+    "fields": {
+      "product": 11,
+      "version_number": 15,
+      "name": "Release",
+      "is_actual": false
+    }
+  }
+]
