@@ -1,0 +1,48 @@
+{% extends 'mailer/base.html' %}
+
+{% block content %}
+<div style="margin-top: 50px">
+    <a type="button" class="btn btn-block btn-outline-success col-2 mb-3"
+       href="{% url 'mailings:mailing_create' %}">Добавить рассылку</a>
+</div>
+
+<table class="table table-striped" style="vertical-align:middle">
+    <thead>
+        <tr>
+            <th>Время</th>
+            <th>Период</th>
+            <th>Статус</th>
+            <th>Сообщение</th>
+            <th>Подписчиков</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        {% for object in object_list %}
+        <tr>
+            <td>{{ object.time }}</td>
+            <td>{{ object.get_period_display }}</td>
+            <td>{{ object.get_status_display }}</td>
+            <td>{{ object.message }}</td>
+            <td>
+                {% if perms.mailing.change_mailingsettings %}
+                <a href="{% url 'mailings:mailing_clients' object.pk %}">Подписчиков: {{ object.mailingclient_set.count }}</a>
+                {% else %}
+                Подписчиков: {{ object.mailingclient_set.count }}
+                {% endif %}
+            </td>
+
+
+            <td>
+                <a type="button" class="btn btn-Warning btn-warning text-center match-height"
+                   href="{% url 'mailings:mailing_update' object.pk %}" title="Изменить"><span class="material-symbols-outlined">settings</span></a>
+                {% if perms.mailing.delete_mailingsettings %}
+                <a type="button" class="btn btn-danger btn-warning text-center match-height"
+                   href="{% url 'mailings:mailing_delete' object.pk %}" title="Удалить"><span class="material-symbols-outlined">close</span></a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

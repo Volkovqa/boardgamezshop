@@ -13,23 +13,18 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="/category_list" class="nav-link text-white">
-                Категории
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="/contacts" class="nav-link text-white">
-                Контакты
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{% url 'blog:list' %}" class="nav-link text-white">
-                Блог
-            </a>
-        </li>
-        <li class="nav-item">
             <a href="{% url 'mailer:mailing_list' %}" class="nav-link text-white">
                 Рассылки
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'mailings:clients' %}" class="nav-link text-white">
+                Клиенты
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'mailings:messages' %}" class="nav-link text-white">
+                Сообщения
             </a>
         </li>
         {% if user.is_authenticated %}
