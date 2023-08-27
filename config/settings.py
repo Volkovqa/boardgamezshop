@@ -56,7 +56,8 @@ INSTALLED_APPS = [
     'catalog',
     'blog',
     'users',
-    'mailer'
+    'mailer',
+    'django_crontab'
 ]
 
 MIDDLEWARE = [
@@ -172,3 +173,7 @@ if CACHE_ENABLED:
             "LOCATION": get_env_value('CACHE_LOCATION'),
         }
     }
+
+CRONJOBS = [
+    ('*/60****', 'mailer.services.send_mails')
+]
