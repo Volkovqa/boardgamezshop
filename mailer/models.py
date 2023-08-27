@@ -33,8 +33,8 @@ class MailingSettings(models.Model):
     STATUS_STARTED = 'started'
     STATUS_DONE = 'done'
     STATUSES = (
-        (STATUS_CREATED, 'Запущена'),
-        (STATUS_STARTED, 'Создана'),
+        (STATUS_STARTED, 'Запущена'),
+        (STATUS_CREATED, 'Создана'),
         (STATUS_DONE, 'Завершена')
     )
 

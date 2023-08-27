@@ -160,6 +160,8 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = 'volkovqa@yandex.ru'
 EMAIL_HOST_PASSWORD = get_env_value('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL = True
+EMAIL_USE_SLL = True
+EMAIL_USE_TLS = False
 
 CACHE_ENABLED = get_env_value('CACHE_ENABLED') == 'True'
 
