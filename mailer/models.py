@@ -88,6 +88,7 @@ class MailingLog(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name='Клиент')
     settings = models.ForeignKey(MailingSettings, on_delete=models.CASCADE, verbose_name='Настройки')
     status = models.CharField(choices=STATUSES, default=STATUS_OK, verbose_name='Статус')
+    mailing_service_response = models.TextField(verbose_name='Результат', **NULLABLE)
 
     def __str__(self):
         return f'{self.last_try}'
