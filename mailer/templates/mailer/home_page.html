@@ -27,7 +27,7 @@
                     <img src="{{ object.image|mediapath }}" class="card-img-top" alt="...">
                 </div>
                 <div class="card-footer">
-                    <a href="{% url 'blog:detail_blog' object.pk %}" class="btn btn-outline-warning border-1">View
+                    <a href="{% url 'blog:view' object.pk %}" class="btn btn-outline-warning border-1">View
                     </a>
                 </div>
                 <p>{{ object.content|truncatechars:100 }}</p>

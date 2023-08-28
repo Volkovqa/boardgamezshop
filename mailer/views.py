@@ -17,7 +17,7 @@ class MailingListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         """Пользователь видит только свои рассылки"""
         queryset = super().get_queryset()
-        if self.request.user.has_perm('mailing.view_mailingsettings'):
+        if self.request.user.has_perm('mailer.view_mailingsettings'):
             return queryset  # Если есть право доступа, то пользователь видит все рассылки
         return queryset.filter(owner=self.request.user)
 
@@ -45,15 +45,15 @@ class MailingSettingsUpdateView(UserPassesTestMixin, UpdateView):
         user = self.request.user
         if mailing.owner == user or user.is_superuser:
             self.form_class = MailingSettingsForm
-        elif user.has_perm('mailing.set_status'):
+        elif user.has_perm('mailer.set_status'):
             self.form_class = MailingSettingsForManagerForm
-        return user.is_authenticated and (mailing.owner == user or user.has_perm('mailing.set_status'))
+        return user.is_authenticated and (mailing.owner == user or user.has_perm('mailer.set_status'))
 
 
 class MailingSettingsDeleteView(LoginRequiredMixin, DeleteView):
     model = MailingSettings
     success_url = reverse_lazy('mailings:mailing_list')
-    permission_required = 'mailing.change_mailingsettings'
+    permission_required = 'mailer.change_mailingsettings'
 
     def get_object(self, queryset=None):
         """ Проверка на то, что пользователь не может удалять чужое сообщение """
@@ -130,7 +130,7 @@ class MessageListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         """Пользователь видит только свои сообщения"""
         queryset = super().get_queryset()
-        if self.request.user.has_perm('mailing.view_mailingmessage'):
+        if self.request.user.has_perm('mailer.view_mailingmessage'):
             return queryset  # Если есть право доступа, то пользователь видит все сообщения
         return super().get_queryset().filter(owner=self.request.user)
 
@@ -196,7 +196,7 @@ class MailingLogsListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        if self.request.user.has_perm('mailing.view_mailinglog'):
+        if self.request.user.has_perm('mailer.view_mailinglog'):
             return queryset  # Если есть право доступа, то пользователь видит все рассылки
         return queryset.filter(owner=self.request.user)
 
@@ -210,6 +210,6 @@ class HomePageView(TemplateView):
         context_data['count_mailing_active'] = MailingSettings.objects.filter(
             status=MailingSettings.STATUS_STARTED).count()
         context_data['count_unique_customers'] = Client.objects.distinct().count()
-        context_data['mailing_blog'] = Blog.objects.all()[:3]
+        context_data['blog'] = Blog.objects.all()[:3]
         context_data['title'] = 'Главная страница рассылок'
         return context_data
