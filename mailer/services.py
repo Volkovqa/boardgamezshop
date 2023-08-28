@@ -33,27 +33,25 @@ def send_mails():
 
     for mail_settings in MailingSettings.objects.filter(status=MailingSettings.STATUS_STARTED):
 
-        if (datetime_now > mail_settings.start_time) and (datetime_now < mail_settings.end_time):
+        for mail_client in mail_settings.mailingclient_set.all():
 
-            for mail_client in mail_settings.mailingclient_set.all():
+            mailing_log = MailingLog.objects.filter(
+                client=mail_client.client,
+                settings=mail_settings
+            )
 
-                mailing_log = MailingLog.objects.filter(
-                    client=mail_client.client,
-                    settings=mail_settings
-                )
+            if mailing_log.exists():
+                last_try_date = mailing_log.order_by('-last_try').first().last_try
 
-                if mailing_log.exists():
-                    last_try_date = mailing_log.order_by('-last_attempt').first().last_attempt
+                if mail_settings.period == MailingSettings.PERIOD_DAILY:
+                    if (datetime_now - last_try_date).days >= 1:
+                        send_email(mail_settings, mail_client)
+                elif mail_settings.period == MailingSettings.PERIOD_WEEKLY:
+                    if (datetime_now - last_try_date).days >= 7:
+                        send_email(mail_settings, mail_client)
+                elif mail_settings.period == MailingSettings.PERIOD_MONTHLY:
+                    if (datetime_now - last_try_date).days >= 30:
+                        send_email(mail_settings, mail_client)
 
-                    if mail_settings.period == MailingSettings.PERIOD_DAILY:
-                        if (datetime_now - last_try_date).days >= 1:
-                            send_email(mail_settings, mail_client)
-                    elif mail_settings.period == MailingSettings.PERIOD_WEEKLY:
-                        if (datetime_now - last_try_date).days >= 7:
-                            send_email(mail_settings, mail_client)
-                    elif mail_settings.period == MailingSettings.PERIOD_MONTHLY:
-                        if (datetime_now - last_try_date).days >= 30:
-                            send_email(mail_settings, mail_client)
-
-                else:
-                    send_email(mail_settings, mail_client)
+            else:
+                send_email(mail_settings, mail_client)
