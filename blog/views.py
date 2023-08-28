@@ -4,6 +4,7 @@ from django.views.generic import CreateView, ListView, DetailView, UpdateView, D
 from pytils.translit import slugify
 
 from blog.models import Blog
+from blog.services import get_cache_blog
 
 
 class BlogCreateView(LoginRequiredMixin, CreateView):
@@ -39,6 +40,7 @@ class BlogUpdateView(LoginRequiredMixin, UpdateView):
 
 class BlogListView(ListView):
     model = Blog
+    queryset = get_cache_blog()
 
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args, **kwargs)
