@@ -33,7 +33,7 @@ def send_mails():
 
     for mail_settings in MailingSettings.objects.filter(status=MailingSettings.STATUS_STARTED):
 
-        if (datetime_now > mail_settings.start_time) and (datetime_now < mail_settings.end_time):
+        if datetime_now > mail_settings.time:
 
             for mail_client in mail_settings.mailingclient_set.all():
 
@@ -43,7 +43,7 @@ def send_mails():
                 )
 
                 if mailing_log.exists():
-                    last_try_date = mailing_log.order_by('-last_attempt').first().last_attempt
+                    last_try_date = mailing_log.order_by('last_try').first().last_attempt
 
                     if mail_settings.period == MailingSettings.PERIOD_DAILY:
                         if (datetime_now - last_try_date).days >= 1:
