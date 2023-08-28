@@ -6,7 +6,7 @@ from mailer.views import *
 app_name = MailerConfig.name
 
 urlpatterns = [
-    path('', MailingListView.as_view(), name='mailing_list'),
+    path('', HomePageView.as_view(), name='main'),
     path('create/', MailingSettingsCreateView.as_view(), name='mailing_create'),
     path('update/<int:pk>/', MailingSettingsUpdateView.as_view(), name='mailing_update'),
     path('delete/<int:pk>/', MailingSettingsDeleteView.as_view(), name='mailing_delete'),
@@ -23,4 +23,6 @@ urlpatterns = [
     path('messages/create/', MessageCreateView.as_view(), name='messages_create'),
     path('messages/update/<int:pk>/', MessageUpdateView.as_view(), name='messages_update'),
     path('messages/delete/<int:pk>/', MessageDeleteView.as_view(), name='messages_delete'),
+
+    path('mailinglogs/', MailingLogsListView.as_view(), name='mailing_logs'),
 ]

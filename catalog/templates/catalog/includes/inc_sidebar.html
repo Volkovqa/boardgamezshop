@@ -27,12 +27,12 @@
                 Блог
             </a>
         </li>
+        {% if user.is_authenticated %}
         <li class="nav-item">
-            <a href="{% url 'mailer:mailing_list' %}" class="nav-link text-white">
+            <a href="{% url 'mailer:main' %}" class="nav-link text-white">
                 Рассылки
             </a>
         </li>
-        {% if user.is_authenticated %}
         <li class="nav-item">
             <a href="{% url 'users:profile' %}" class="nav-link text-white">
                 Профиль

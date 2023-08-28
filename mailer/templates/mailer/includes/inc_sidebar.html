@@ -12,21 +12,32 @@
                 Главная
             </a>
         </li>
+        {% if user.is_authenticated %}
         <li class="nav-item">
-            <a href="{% url 'mailer:mailing_list' %}" class="nav-link text-white">
+            <a href="{% url 'mailer:main' %}" class="nav-link text-white">
                 Рассылки
             </a>
         </li>
+        {% if perms.mailing.view_client %}
         <li class="nav-item">
             <a href="{% url 'mailings:clients' %}" class="nav-link text-white">
                 Клиенты
             </a>
         </li>
+        {% endif %}
+        {% if perms.mailing.view_mailingmessage %}
         <li class="nav-item">
             <a href="{% url 'mailings:messages' %}" class="nav-link text-white">
                 Сообщения
             </a>
         </li>
+        {% endif %}
+        <li class="nav-item">
+            <a href="{% url 'mailings:mailing_logs' %}" class="nav-link text-white">
+                Отчеты
+            </a>
+        </li>
+        {% endif %}
         {% if user.is_authenticated %}
         <li class="nav-item">
             <a href="{% url 'users:profile' %}" class="nav-link text-white">

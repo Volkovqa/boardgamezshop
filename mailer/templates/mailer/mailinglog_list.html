@@ -17,8 +17,8 @@
         <tbody class="table-group-divider">
         {% for object in object_list %}
         <tr>
-            <td>{{ object.last_attempt }}</td>
-            <td>{{ object.try_status }}</td>
+            <td>{{ object.last_try }}</td>
+            <td>{{ object.status }}</td>
             <td>{{ object.mailing_service_response }}</td>
             <td>{{ object.client }}</td>
             <td>{{ object.mailing }}</td>

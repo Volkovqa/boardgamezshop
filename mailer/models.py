@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings as dcs
 
 NULLABLE = {'blank': True, 'null': True}
 
@@ -9,6 +10,8 @@ class Client(models.Model):
     first_name = models.CharField(**NULLABLE, verbose_name='Имя', max_length=150)
     surname = models.CharField(**NULLABLE, verbose_name='Отчество', max_length=150)
     comment = models.TextField(**NULLABLE, verbose_name='Комментарий')
+    owner = models.ForeignKey(dcs.AUTH_USER_MODEL, on_delete=models.CASCADE, **NULLABLE,
+                              verbose_name='Пользователь')
 
     def __str__(self):
         return f'{self.last_name} {self.first_name} {self.surname} ({self.email})'
@@ -44,6 +47,9 @@ class MailingSettings(models.Model):
 
     message = models.ForeignKey('MailingMessage', on_delete=models.CASCADE, verbose_name='Сообщение', **NULLABLE)
 
+    owner = models.ForeignKey(dcs.AUTH_USER_MODEL, on_delete=models.CASCADE, **NULLABLE,
+                              verbose_name='Пользователь')
+
     def __str__(self):
         return f'{self.time} / {self.period}'
 
@@ -51,10 +57,16 @@ class MailingSettings(models.Model):
         verbose_name = 'Настройка'
         verbose_name_plural = 'Настройки'
 
+        permissions = [
+            ('set_status',
+             'Can change status')
+        ]
+
 
 class MailingClient(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name='Клиент')
     settings = models.ForeignKey(MailingSettings, on_delete=models.CASCADE, verbose_name='Настройки')
+    owner = models.ForeignKey(dcs.AUTH_USER_MODEL, on_delete=models.CASCADE, **NULLABLE, verbose_name='Пользователь')
 
     def __str__(self):
         return f'{self.client} / {self.settings}'
@@ -67,6 +79,8 @@ class MailingClient(models.Model):
 class MailingMessage(models.Model):
     subject = models.CharField(max_length=250, verbose_name='Тема')
     message = models.TextField(verbose_name='Тело сообщения')
+    owner = models.ForeignKey(dcs.AUTH_USER_MODEL, on_delete=models.CASCADE, **NULLABLE,
+                              verbose_name='Пользователь')
 
     def __str__(self):
         return f'{self.subject}'
@@ -89,6 +103,7 @@ class MailingLog(models.Model):
     settings = models.ForeignKey(MailingSettings, on_delete=models.CASCADE, verbose_name='Настройки')
     status = models.CharField(choices=STATUSES, default=STATUS_OK, verbose_name='Статус')
     mailing_service_response = models.TextField(verbose_name='Результат', **NULLABLE)
+    owner = models.ForeignKey(dcs.AUTH_USER_MODEL, on_delete=models.CASCADE, **NULLABLE, verbose_name='Пользователь')
 
     def __str__(self):
         return f'{self.last_try}'

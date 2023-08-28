@@ -14,3 +14,13 @@ class User(AbstractUser):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+
+    class Meta:
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
+
+        # кастомные права на блокировку пользователя
+        permissions = [
+            ('set_is_active',
+             'Can change is_active')
+        ]
