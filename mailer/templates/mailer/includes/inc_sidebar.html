@@ -23,20 +23,16 @@
                 Управление рассылками
             </a>
         </li>
-        {% if perms.mailer.view_client %}
         <li class="nav-item">
             <a href="{% url 'mailings:clients' %}" class="nav-link text-white">
                 Клиенты
             </a>
         </li>
-        {% endif %}
-        {% if perms.mailer.view_mailingmessage %}
         <li class="nav-item">
             <a href="{% url 'mailings:messages' %}" class="nav-link text-white">
                 Сообщения
             </a>
         </li>
-        {% endif %}
         <li class="nav-item">
             <a href="{% url 'mailings:mailing_logs' %}" class="nav-link text-white">
                 Отчеты

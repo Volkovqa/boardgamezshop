@@ -69,7 +69,7 @@ class MailingClientsListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        queryset = queryset.filter(mailing=self.kwargs.get('pk'))
+        queryset = queryset.filter(settings=self.kwargs.get('pk'))
         return queryset
 
     def get_context_data(self, *args, **kwargs):
