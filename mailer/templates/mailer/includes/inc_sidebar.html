@@ -12,27 +12,34 @@
                 Главная
             </a>
         </li>
-        <li class="nav-item">
-            <a href="/category_list" class="nav-link text-white">
-                Категории
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="/contacts" class="nav-link text-white">
-                Контакты
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{% url 'blog:list' %}" class="nav-link text-white">
-                Блог
-            </a>
-        </li>
         {% if user.is_authenticated %}
         <li class="nav-item">
             <a href="{% url 'mailer:main' %}" class="nav-link text-white">
                 Рассылки
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{% url 'mailer:mailing_list' %}" class="nav-link text-white">
+                Управление рассылками
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'mailings:clients' %}" class="nav-link text-white">
+                Клиенты
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'mailings:messages' %}" class="nav-link text-white">
+                Сообщения
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'mailings:mailing_logs' %}" class="nav-link text-white">
+                Отчеты
+            </a>
+        </li>
+        {% endif %}
+        {% if user.is_authenticated %}
         <li class="nav-item">
             <a href="{% url 'users:profile' %}" class="nav-link text-white">
                 Профиль

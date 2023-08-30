@@ -1,0 +1,20 @@
+{% extends 'mailer/base.html' %}
+
+{% block content %}
+<div class="col-12" style="margin-top:50px">
+  <div class="row">
+    <div class="col-6">
+      <div class="card bg-transparent">
+        <div class="card-body">
+          <form method="post", enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>Хотите удалить рассылку сообщения: "{{ object.message }}"?</p>
+            <button type="submit" class="btn btn-primary">Удалить</button>
+            <a href="{% url 'mailings:mailing_list' %}" class="btn btn-secondary">Отмена</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
